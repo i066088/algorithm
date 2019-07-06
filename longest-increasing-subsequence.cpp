@@ -94,3 +94,17 @@ public:
 		return max;
 	}
 };
+
+//recommend this solution
+class SolutionBest {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> array; //the index is the longest number array[i] is the lowest end number
+        for(int i:nums){
+            auto iter=lower_bound(array.begin(),array.end(),i);
+            if(iter==array.end()) array.push_back(i);
+            else *iter=i;
+        }
+        return array.size();
+    }
+};
