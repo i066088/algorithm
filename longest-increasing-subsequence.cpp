@@ -55,3 +55,42 @@ public:
 		return max + 1;
 	}
 };
+
+
+//run in O(n2) complexity.
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution2 {
+public:
+	int lengthOfLIS(vector<int>& nums) {
+
+		size_t size = nums.size();
+		if (size == 0)return size;
+
+		vector<int> ret;
+		ret.assign(size, 1);
+
+		for (size_t i = 1; i < size; ++i)
+		{
+			for (size_t j = 0; j < i; ++j)
+			{
+				if (nums[i] > nums[j] && ret[i] < ret[j] + 1)
+				{
+					ret[i] = ret[j] + 1;
+				}
+			}
+		}
+
+		int max = ret[0];
+		for (size_t i = 1; i < size; ++i)
+		{
+			if (max < ret[i])
+			{
+				max = ret[i];
+			}
+		}
+		return max;
+	}
+};
